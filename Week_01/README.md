@@ -51,3 +51,4 @@ $ java ‐jar hello.jar
 
 ###3 java内存模型
 方法中使用的原生数据类型和对象引用地址在栈上存储；对象、对象成员与类定义、静态变量在堆上。
+Java中几种常量池的区分 http://tangxman.github.io/2015/07/27/the-difference-of-java-string-pool/

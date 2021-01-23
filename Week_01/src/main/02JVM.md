@@ -5,6 +5,7 @@
     young:标记,复制算法, old:标记,清除,整理算法, 也会STW,多个GC线程并行执行, 利用多核优势,STW时间短,吞吐量高
     -XX：ParallelGCThreads=N 来指定 GC 线程数， 其默认值为 CPU 核心数。
 -XX:+UseConMarkSweepGC CMS(解决老年代垃圾回收时,系统长时间卡顿,即:没有明显线程暂停但会与应用线程抢CPU时间; 老年代并发回收时,会伴有多次youngGC)
+    GC线程数:默认是Java线程的1/4
     young:使用并行STW标记,复制算法(ParallelGC), old:使用*并发*标记,清除算法
     old:
     1.不对老年代进行整理，而是使用空闲列表（free-lists）来管理内存空间的回收
@@ -16,7 +17,9 @@
       阶段 6: Concurrent Reset（并发重置）
 -XX:+UseG1GC -XX:MaxGCPauseMillis=50 G1算法(将 STW 停顿的时间和分布，变成可预期且可配置的)
     没有young与old的明确划分,堆被划分成多(通常2048)个存放对象的小块, 每个小块可能是Eden,survivor,old区
-    
+    -XX:ConcGCThreads ：与Java应用一起执行的GC线程数量，默默认是Java线程的1/4
+频繁fullGC原因: 一个是大对象直接分配到了老年代。一个是过早提升年轻带到老年代
+调大G1 region大小，如果FGC减少了，也是这个大对象问题 
     
     
 
