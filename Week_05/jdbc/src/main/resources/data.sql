@@ -1,0 +1,1 @@
+INSERT INTO t_app (id, status) VALUES (1,'5');
